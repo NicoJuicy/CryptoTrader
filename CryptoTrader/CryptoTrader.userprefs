@@ -1,12 +1,14 @@
 ﻿<Properties StartupItem="CryptoTrader/CryptoTrader.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="CryptoTrader/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CryptoTrader/botCore/Market.cs">
     <Files>
-      <File FileName="CryptoTrader/Program.cs" Line="22" Column="4" />
+      <File FileName="CryptoTrader/Program.cs" Line="11" Column="3" />
+      <File FileName="CryptoTrader/botCore/Market.cs" Line="34" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <AuthorInfo Name="Ben Higgs &amp; James Carr" Email="ben.higgs@me.com" Copyright="Ben Higgs &amp; James Carr" Company="" Trademark="" />
 </Properties>

@@ -14,7 +14,7 @@ namespace CryptoTrader
 
 		double calculateProfit ()
 		{
-			double profit;
+			double profit = 0;
 			//...
 			return profit;
 		}

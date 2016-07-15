@@ -7,6 +7,16 @@ namespace CryptoTrader
 		public MarketData ()
 		{
 		}
+
+		void Export () 
+		{
+
+		}
+
+		void Import () 
+		{
+			
+		}
 	}
 }
 

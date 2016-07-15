@@ -14,7 +14,9 @@ namespace CryptoTrader
 
 		double convert ( double newCurrency )
 		{
-
+			double price = 0;
+			//...
+			return price;
 		}
 	}
 }
