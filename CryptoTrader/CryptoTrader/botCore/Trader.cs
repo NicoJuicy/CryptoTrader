@@ -10,7 +10,7 @@ namespace CryptoTrader
 
 		public Trader ()
 		{
-			
+			// Construct BrainParts here?
 		}
 
 		void buy () 

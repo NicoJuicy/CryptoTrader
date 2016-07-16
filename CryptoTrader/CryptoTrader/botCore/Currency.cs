@@ -4,17 +4,26 @@ namespace CryptoTrader
 {
 	public class Currency
 	{
-		string name { get; set; }
-		double last { get; set; }
-		double buy { get; set; }
-		double sell { get; set; }
-		char symbol { get; set; }
-
-		public Currency () {}
-
-		double convert ( double newCurrency )
+		struct Coin
 		{
-			return buy;
+			string name;
+			double _15m;
+			double last;
+			double buy;
+			double sell;
+			char symbol;
+		};
+
+		public Currency () 
+		{
+			Coin coin = new Coin ();
+		}
+
+		public double convert ( double newCurrency )
+		{
+			double profit;
+			//...
+			return profit;
 		}
 	}
 }

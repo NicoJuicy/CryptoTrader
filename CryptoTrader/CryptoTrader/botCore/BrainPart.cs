@@ -6,7 +6,7 @@ namespace CryptoTrader
 	{
 		public BrainPart ()
 		{
-			
+			// construct Neurons here?
 		}
 
 		void set () 
