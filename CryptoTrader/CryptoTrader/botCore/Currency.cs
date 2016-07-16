@@ -4,19 +4,17 @@ namespace CryptoTrader
 {
 	public class Currency
 	{
-		string name;
-		double price;
+		string name { get; set; }
+		double last { get; set; }
+		double buy { get; set; }
+		double sell { get; set; }
+		char symbol { get; set; }
 
-		public Currency ()
-		{
-			
-		}
+		public Currency () {}
 
 		double convert ( double newCurrency )
 		{
-			double price = 0;
-			//...
-			return price;
+			return buy;
 		}
 	}
 }

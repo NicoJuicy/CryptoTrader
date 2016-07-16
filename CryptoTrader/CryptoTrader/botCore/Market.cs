@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Web.Script.Serialization;
 
 namespace CryptoTrader
 {
@@ -18,22 +19,30 @@ namespace CryptoTrader
 
 		public double currentPrice { get; set; }
 
-		public Market () {}
+		public Market () 
+		{
+			
+		}
 
 		// Maybe rename to UpdateTicker?
 		public double GetMarketPrice (string currency, string exchange) 
 		{	
-			double currentPrice = 0;
-			string tickerURL = "https://blockchain.info/ticker";
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create (tickerURL);
-			HttpWebResponse response = (HttpWebResponse)request.GetResponse ();
+			if (exchange == "BLOCKCHAIN") {
+				string tickerURL = "https://blockchain.info/ticker";
+				HttpWebRequest request = (HttpWebRequest)WebRequest.Create (tickerURL);
+				HttpWebResponse response = (HttpWebResponse)request.GetResponse ();
 
-			using (StreamReader stream = new StreamReader (response.GetResponseStream()))
-			{
 				string line;
-				while ((line = stream.ReadLine ()) != null) {
-					if (line.Contains (currency)) {
-						Console.WriteLine (line);
+				using (StreamReader stream = new StreamReader (response.GetResponseStream ())) {
+					//line = stream.ReadToEnd ();
+
+					// try serialization to Currency class object
+
+					while ((line = stream.ReadLine ()) != null) {
+						if (line.Contains (currency)) {
+							Console.WriteLine (line);
+							break;
+						}
 					}
 				}
 			}
