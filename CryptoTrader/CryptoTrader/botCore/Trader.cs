@@ -5,22 +5,41 @@ namespace CryptoTrader
 {
 	public class Trader
 	{
+		static int totalTraders = 0;
+		int traderId;
 		double cash;
 		List<Trade> openTrades;
 
-		public Trader ()
+		//temp vars
+		string currency = "GBP";
+		string exchange = "BLOCKCHAIN";
+
+		public Trader (double cash)
 		{
-			// Construct BrainParts here?
+			//BrainPart brain = new BrainPart ();
+
+			traderId = totalTraders += 1;
+			this.cash = cash;
+			openTrades = new List<Trade>();
 		}
 
-		void buy () 
+		void Buy () 
 		{
-			
+			Trade trade = new Trade (currency, exchange);
+			openTrades.Add (trade);
 		}
 
-		void sell () 
+		void Sell () 
 		{
-			
+			Trade trade = new Trade (currency, exchange);
+			openTrades.Add (trade);
+		}
+
+		void CloseAllTrades () 
+		{
+			// close any open connections...
+
+			openTrades.Clear ();
 		}
 	}
 }

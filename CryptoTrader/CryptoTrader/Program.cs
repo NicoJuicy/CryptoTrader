@@ -12,18 +12,31 @@
 */
 
 using System;
+using System.Collections.Generic;
 
 namespace CryptoTrader
 {
 	class MainClass
 	{
-		public static double globalCash; // a.k.a RiskCapital
+		public static double globalCash; 	// a.k.a RiskCapital
+		static List<Trader> traders = new List<Trader>();
+		static List<Market> markets = new List<Market> ();
 
 		public static void Main (string[] args)
 		{
-			Market market = new Market ();
-			double x = market.GetMarketPrice ("GBP", "BLOCKCHAIN");
-		}
 			
+		}
+
+		void CreateTrader () 
+		{
+			Trader trader = new Trader (100.00);
+			traders.Add (trader);
+		}
+
+		void CreateMarket () 
+		{
+			Market market = new Market ();
+			markets.Add (market);
+		}
 	}
 }

@@ -21,7 +21,7 @@ namespace CryptoTrader
 
 		public double convert ( double newCurrency )
 		{
-			double profit;
+			double profit = 0;
 			//...
 			return profit;
 		}
