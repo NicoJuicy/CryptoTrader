@@ -4,11 +4,10 @@ namespace CryptoTrader
 {
 	public class Currency
 	{
-		string type;
+		string type = "BTC";
+		string symbol = "Ƀ"; // unicode: U+0243
 
-		char symbol;
-
-		public Currency () 
+		public Currency (string type) 
 		{
 			
 		}

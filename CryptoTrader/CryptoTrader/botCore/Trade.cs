@@ -4,7 +4,7 @@ namespace CryptoTrader
 {
 	public class Trade
 	{
-		int tradeId;
+		public int tradeId { get; private set;}
 
 		double boughtPrice; // exchange rate
 		double askPrice;
@@ -14,27 +14,34 @@ namespace CryptoTrader
 
 		public Trade (string currency, string exchange)
 		{
-			tradeId += 1; // assign a random id for security?
+			tradeId = GenerateTradeId ();
 			this.currency = currency;
 			this.exchange = exchange;
 		}
 
-		public bool MarketOrderBuy (double price, int qty) 
+		int GenerateTradeId ()
+		{
+			int id = 0;
+			//...
+			return id;
+		}
+
+		public bool MarketOrderBuy (double price, double qty) 
 		{
 			return true;
 		}
 
-		public bool MarketOrderSell (double price, int qty) 
+		public bool MarketOrderSell (double price, double qty) 
 		{
 			return true;
 		}
 
-		public bool LimitOrderBuy (double limit, int qty)
+		public bool LimitOrderBuy (double limit, double qty)
 		{
 			return true;
 		}
 
-		public bool LimitOrderSell (double limit, int qty)
+		public bool LimitOrderSell (double limit, double qty)
 		{
 			return true;
 		}

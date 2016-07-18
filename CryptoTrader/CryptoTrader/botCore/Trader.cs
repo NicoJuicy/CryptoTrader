@@ -9,6 +9,7 @@ namespace CryptoTrader
 		int traderId;
 		double cash;
 		List<Trade> openTrades;
+		List<Trade> pastTrades;
 
 		//temp vars
 		string currency = "GBP";
@@ -16,22 +17,49 @@ namespace CryptoTrader
 
 		public Trader (double cash)
 		{
-			//BrainPart brain = new BrainPart ();
+			BrainPart brain = new BrainPart ();
 			traderId = totalTraders += 1;
+			openTrades = new List<Trade> ();
+			pastTrades = new List<Trade> ();
 			this.cash = cash;
-			openTrades = new List<Trade>();
 		}
 
-		public void Buy () 
+		public int Buy (double price, double qty, string tradeType) 
 		{
 			Trade trade = new Trade (currency, exchange);
 			openTrades.Add (trade);
+
+			switch (tradeType) {
+			case "market":
+				trade.MarketOrderBuy (price, qty);
+				return trade.tradeId;
+			case "limit":
+				trade.LimitOrderBuy (price, qty);
+				return trade.tradeId;
+			default:
+				Console.WriteLine ("Invalid trade type, Purchase failed");
+				return -1;
+			}
+			pastTrades.Add (trade);
+			openTrades.Remove (trade);
 		}
 
-		public void Sell () 
+		public void Sell (double price, double qty, string tradeType) 
 		{
 			Trade trade = new Trade (currency, exchange);
 			openTrades.Add (trade);
+
+			switch (tradeType) {
+				case "market":
+					trade.MarketOrderSell (price, qty);
+					break;
+				case "limit":
+					trade.LimitOrderSell (price, qty);
+					break;
+				default:
+					Console.WriteLine ("Invalid trade type, Purchase failed");
+					break;
+			}
 		}
 
 		public void CloseAllTrades () 

@@ -2,7 +2,6 @@
 	ToDo:
 	Methods for executing different types of orders
 		e.g. Long, short, market order, stop loss etc
-					or maybe put these in Trade class?
 */
 
 using System;
@@ -14,34 +13,44 @@ namespace CryptoTrader
 {
 	public class Market
 	{
+		public string exchangeName { get; private set; }
+		public double currentPrice { get; set; }
+		MarketData data;
+
 		public enum Currencies { BTC, GBP };
 		public enum Exchanges { BLOCKCHAIN };
 
-		public double currentPrice { get; set; }
-
-		public Market () 
+		public Market (string name) 
 		{
-			//MarketData data = new MarketData ();
-			this.currentPrice = UpdateTicker ("GBP", "BLOCKCHAIN");
+			this.exchangeName = name;
+			//this.currentPrice = UpdateTicker ("GBP", exchangeName);
 		}
 			
-		public double UpdateTicker (string currency, string exchange) 
-		{	
-			if (exchange == "BLOCKCHAIN") {
+		public string UpdateTicker (string currency, string exchange) 
+		{
+			if (exchange == exchangeName) {
 				string tickerURL = "https://blockchain.info/ticker";
-				string priceObj = MakeAPIRequest (tickerURL);
+				string tickerObj = MakeAPIRequest (tickerURL);
 
-				JavaScriptSerializer data = new JavaScriptSerializer ();
-				data.Deserialize<Currency> (priceObj); // ?? no idea what im doing here ??
+				//JavaScriptSerializer serializedData = new JavaScriptSerializer ();
+				//serializedData.Deserialize<Currency> (tickerObj); // ?? no idea what im doing here ??
+				//Console.WriteLine (serializedData);
 
-				return currentPrice;
-			} else { return -1; }
-		} // update MarketData and return price
+				return tickerObj;
+			} else { 
+				return "error: Unknown exchange"; 
+			}
+		} 
 
 		public string GetStats () 
 		{
 			string statsURL = "https://blockchain.info/stats?format=json";
 			string stats = MakeAPIRequest (statsURL);
+
+			//formatting
+			stats = stats.Replace (",", ",\n");
+			stats = stats.Replace ("{", "{\n");
+			stats = stats.Replace ("}", "\n}");
 			return stats;
 		}
 
@@ -51,13 +60,12 @@ namespace CryptoTrader
 			Int64 totalBtc = Int64.Parse (MakeAPIRequest(totalSatoshiURL)) / 100000000;
 			return totalBtc;
 		}
-
-		// Returns estimated time in seconds
+			
 		public float TimeTillNextBlock () 
 		{
 			string etaURL = "https://blockchain.info/q/eta";
 			float eta = float.Parse (MakeAPIRequest (etaURL));
-			return eta;
+			return eta; // in seconds
 		}
 
 		string MakeAPIRequest (string url)

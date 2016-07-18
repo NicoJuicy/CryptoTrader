@@ -1,6 +1,20 @@
 ﻿<Properties StartupItem="CryptoTrader/CryptoTrader.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="CryptoTrader/botCore/Market.cs">
+    <Files>
+      <File FileName="CryptoTrader/Program.cs" Line="27" Column="4" />
+      <File FileName="CryptoTrader/botCore/Trader.cs" Line="19" Column="41" />
+      <File FileName="CryptoTrader/botCore/Trade.cs" Line="27" Column="15" />
+      <File FileName="CryptoTrader/botCore/Market.cs" Line="32" Column="50" />
+    </Files>
+    <Pads>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>watch1</Value>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
