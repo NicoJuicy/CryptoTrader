@@ -17,25 +17,24 @@ namespace CryptoTrader
 		public Trader (double cash)
 		{
 			//BrainPart brain = new BrainPart ();
-
 			traderId = totalTraders += 1;
 			this.cash = cash;
 			openTrades = new List<Trade>();
 		}
 
-		void Buy () 
+		public void Buy () 
 		{
 			Trade trade = new Trade (currency, exchange);
 			openTrades.Add (trade);
 		}
 
-		void Sell () 
+		public void Sell () 
 		{
 			Trade trade = new Trade (currency, exchange);
 			openTrades.Add (trade);
 		}
 
-		void CloseAllTrades () 
+		public void CloseAllTrades () 
 		{
 			// close any open connections...
 

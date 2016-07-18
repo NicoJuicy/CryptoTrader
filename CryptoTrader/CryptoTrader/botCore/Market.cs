@@ -22,54 +22,51 @@ namespace CryptoTrader
 		public Market () 
 		{
 			//MarketData data = new MarketData ();
-			this.currentPrice = GetMarketPrice (Currencies.BTC, Exchanges.BLOCKCHAIN);
+			this.currentPrice = UpdateTicker ("GBP", "BLOCKCHAIN");
 		}
-
-		// Maybe rename to UpdateTicker?
-		public double GetMarketPrice (string currency, string exchange) 
+			
+		public double UpdateTicker (string currency, string exchange) 
 		{	
 			if (exchange == "BLOCKCHAIN") {
 				string tickerURL = "https://blockchain.info/ticker";
-				HttpWebRequest request = (HttpWebRequest)WebRequest.Create (tickerURL);
-				HttpWebResponse response = (HttpWebResponse)request.GetResponse ();
+				string priceObj = MakeAPIRequest (tickerURL);
 
-				string line;
-				using (StreamReader stream = new StreamReader (response.GetResponseStream ())) {
-					
-					//line = stream.ReadToEnd ();
-					// try serialization to Currency class object
+				JavaScriptSerializer data = new JavaScriptSerializer ();
+				data.Deserialize<Currency> (priceObj); // ?? no idea what im doing here ??
 
-					while ((line = stream.ReadLine ()) != null) {
-						if (line.Contains (currency)) {
-							Console.WriteLine (line);
+				return currentPrice;
+			} else { return -1; }
+		} // update MarketData and return price
 
-						}
-					}
-				}
-			}
-			return currentPrice;
+		public string GetStats () 
+		{
+			string statsURL = "https://blockchain.info/stats?format=json";
+			string stats = MakeAPIRequest (statsURL);
+			return stats;
 		}
 
 		public Int64 GetTotalBTC () 
 		{
-			string totalSatoshi = "https://blockchain.info/q/totalbc";
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create (totalSatoshi);
-			HttpWebResponse response = (HttpWebResponse)request.GetResponse ();
-			using (StreamReader resStream = new StreamReader (response.GetResponseStream ())) {
-				Int64 totalBtc = Int64.Parse (resStream.ReadToEnd ()) / 100000000; 		// <-- convert to btc 
-				return totalBtc;
-			}
+			string totalSatoshiURL = "https://blockchain.info/q/totalbc";
+			Int64 totalBtc = Int64.Parse (MakeAPIRequest(totalSatoshiURL)) / 100000000;
+			return totalBtc;
 		}
-			
+
 		// Returns estimated time in seconds
 		public float TimeTillNextBlock () 
 		{
 			string etaURL = "https://blockchain.info/q/eta";
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create (etaURL);
+			float eta = float.Parse (MakeAPIRequest (etaURL));
+			return eta;
+		}
+
+		string MakeAPIRequest (string url)
+		{
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create (url);
 			HttpWebResponse response = (HttpWebResponse)request.GetResponse ();
 			using (StreamReader stream = new StreamReader (response.GetResponseStream ())) {
-				float eta = float.Parse (stream.ReadToEnd ());
-				return eta;
+				string responseStream = stream.ReadToEnd ();
+				return responseStream;
 			}
 		}
 	}

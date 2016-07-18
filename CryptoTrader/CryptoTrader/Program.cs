@@ -18,7 +18,7 @@ namespace CryptoTrader
 {
 	class MainClass
 	{
-		public static double globalCash; 	// a.k.a RiskCapital
+		public static double globalCash = 1000; // a.k.a RiskCapital
 		static List<Trader> traders = new List<Trader>();
 		static List<Market> markets = new List<Market> ();
 
@@ -27,16 +27,18 @@ namespace CryptoTrader
 			
 		}
 
-		void CreateTrader () 
+		static void CreateTrader (double startCash) 
 		{
-			Trader trader = new Trader (100.00);
+			Trader trader = new Trader (startCash);
 			traders.Add (trader);
+			//return trader;
 		}
 
-		void CreateMarket () 
+		static void CreateMarket () 
 		{
 			Market market = new Market ();
 			markets.Add (market);
+			//return market;
 		}
 	}
 }
