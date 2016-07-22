@@ -4,11 +4,12 @@ namespace CryptoTrader
 {
 	public class Currency
 	{
-		private string type;
-        private double last;
-        private double buy;
-        private double sell;
-		private string symbol;
+        private string _type;
+        private double _15m;
+        private double _last;
+        private double _buy;
+        private double _sell;
+		private string _symbol;
         /*
          * Initialise a currency with its type and symbol.
          * eg. type:"GBP" symbol:"£"
@@ -17,8 +18,8 @@ namespace CryptoTrader
          */
 		public Currency (string type, string symbol) 
 		{
-            this.type = type;
-            this.symbol = symbol;
+            this._type = type;
+            this._symbol = symbol;
 		}
 
         /// <summary>
@@ -35,6 +36,46 @@ namespace CryptoTrader
 			//...
 			return profit;
 		}
+
+        /*
+         * Getters and setters for properties. 
+         */
+        public string Type
+        {
+            get { return _type; }
+            set { _type = value; }
+        }
+
+        public double FifteenM
+        {
+            get { return _15m; }
+            set { _15m = value; }
+        }
+
+        public double Last
+        {
+            get { return _last; }
+            set { _last = value; }
+        }
+
+        public double Buy
+        {
+            get { return _buy; }
+            set { _buy = value; }
+        }
+
+        public double Sell
+        {
+            get { return _sell; }
+            set { _sell = value; }
+        }
+
+        public string Symbol
+        {
+            get { return _symbol; }
+            set { _symbol = value; }
+        }
+
 	}
 }
 
