@@ -5,6 +5,7 @@
 					or maybe put these in Trade class?
 */
 
+using CryptoTrader.botCore;
 using System;
 using System.IO;
 using System.Net;
@@ -14,31 +15,32 @@ namespace CryptoTrader
 {
 	public class Market
 	{
-		public enum Currencies { BTC, GBP };
-		public enum Exchanges { BLOCKCHAIN };
-
-		public double currentPrice { get; set; }
-
-        // Making a change - testing git
+		public string currentPrice { get; set; }
 
 		public Market () 
-		{
-			//MarketData data = new MarketData ();
-			this.currentPrice = UpdateTicker ("GBP", "BLOCKCHAIN");
+		{			
+            // Ticker should be updated regularly to keep data up to date.
+			UpdateTicker();
 		}
-			
-		public double UpdateTicker (string currency, string exchange) 
-		{	
-			if (exchange == "BLOCKCHAIN") {
-				string tickerURL = "https://blockchain.info/ticker";
-				string priceObj = MakeAPIRequest (tickerURL);
+		
+        /*
+         * Updates all currencies with the appropriate data from blockchain.
+         */
+		public void UpdateTicker ()
+		{
+            string tickerURL = "https://blockchain.info/ticker";
+            string tickerData = MakeAPIRequest(tickerURL);
+            string debug = tickerData.Split('\n')[2]; //splitting string into lines
+            Console.WriteLine(debug);  
 
-				JavaScriptSerializer data = new JavaScriptSerializer ();
-				data.Deserialize<Currency> (priceObj); // ?? no idea what im doing here ??
+            /*
+             * Once we get data from JSON string we can put the data into the respective fields for each currency.
+             */ 
 
-				return currentPrice;
-			} else { return -1; }
-		} // update MarketData and return price
+            // Kept serialization stuff incase we want use it still
+            // JavaScriptSerializer data = new JavaScriptSerializer ();
+            // data.Deserialize<Currency> (priceObj); // ?? no idea what im doing here ??				
+		}
 
 		public string GetStats () 
 		{
