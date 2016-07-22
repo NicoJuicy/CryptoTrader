@@ -19,6 +19,8 @@ namespace CryptoTrader
 
 		public double currentPrice { get; set; }
 
+        // Making a change - testing git
+
 		public Market () 
 		{
 			//MarketData data = new MarketData ();
