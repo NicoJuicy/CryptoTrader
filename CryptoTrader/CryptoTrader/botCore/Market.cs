@@ -6,9 +6,12 @@
 */
 
 using CryptoTrader.botCore;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web.Script.Serialization;
 
 namespace CryptoTrader
@@ -30,16 +33,25 @@ namespace CryptoTrader
 		{
             string tickerURL = "https://blockchain.info/ticker";
             string tickerData = MakeAPIRequest(tickerURL);
+            
             string debug = tickerData.Split('\n')[2]; //splitting string into lines
-            Console.WriteLine(debug);  
-
+            // Console.WriteLine(debug);
+            // Regex to split string into lines
+            var tickerDataLines = Regex.Split(tickerData, "\r\n|\r|\n");
+            // Iterates over all the lines with useful data
+            for (int i = 2; i <= 22; i++)
+            {
+                // Parse important infomation out
+                Console.WriteLine(tickerDataLines[i]);
+            }
             /*
              * Once we get data from JSON string we can put the data into the respective fields for each currency.
-             */ 
-
+             */
+            
+            
             // Kept serialization stuff incase we want use it still
-            // JavaScriptSerializer data = new JavaScriptSerializer ();
-            // data.Deserialize<Currency> (priceObj); // ?? no idea what im doing here ??				
+            //JavaScriptSerializer data = new JavaScriptSerializer ();
+            //data.Deserialize<string> (tickerData); // ?? no idea what im doing here ??				
 		}
 
 		public string GetStats () 
