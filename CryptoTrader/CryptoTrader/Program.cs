@@ -24,8 +24,26 @@ namespace CryptoTrader
 		public static void Main (string[] args)
 		{
 			Init ();
-
+            Run();
 		}
+
+        private static void Run()
+        {
+            Boolean running = true;
+            while (running)
+            {
+                char x = (char)Console.Read();
+                if (x.Equals('s'))
+                {
+                    Console.WriteLine("\n\nMarket stats:");
+                    Console.WriteLine(markets[0].GetStats());
+                }
+                else if (x.Equals('q'))
+                {
+                    System.Environment.Exit(1);
+                }
+            }
+        }
 
 		static void CreateTrader (double startCash) 
 		{
@@ -54,12 +72,7 @@ namespace CryptoTrader
             Console.WriteLine();
 			Console.WriteLine ("There are currently {0} Bitcoins in existence", markets[0].GetTotalBTC ());
 			Console.WriteLine ("\nIf the formatting is messed up, try fullscreening the console");
-			Console.WriteLine ("To see stats press 's' or press 'q' to quit");
-			char x = (char)Console.Read ();
-			if (x.Equals ('s')) {
-				Console.WriteLine ("\n\nMarket stats:");
-				Console.WriteLine (markets [0].GetStats ());
-			}
+			Console.WriteLine ("To see stats press 's' or press 'q' to quit");			
 		}
 	}
 }
