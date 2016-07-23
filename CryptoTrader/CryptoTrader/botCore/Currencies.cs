@@ -32,5 +32,12 @@ namespace CryptoTrader.botCore
 
         public static Currency[] list = { USD, ISK, HKD, TWD, CHF, EUR, DKK, CLP, CAD, CNY, THB,
                                           AUD, SGD, KRW, JPY, PLN, GBP, SEK, NZD, BRL, RUB };
+
+        public static void PrintCurrencies(){
+            foreach (Currency c in list)
+            {
+                Console.WriteLine(c.ToString());
+            }
+        }
     }
 }

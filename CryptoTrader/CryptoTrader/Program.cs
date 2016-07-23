@@ -10,6 +10,7 @@
 	Bitcoin API: https://blockchain.info/api
 */
 
+using CryptoTrader.botCore;
 using System;
 using System.Collections.Generic;
 
@@ -38,6 +39,11 @@ namespace CryptoTrader
                     Console.WriteLine("\n\nMarket stats:");
                     Console.WriteLine(markets[0].GetStats());
                 }
+                else if (x.Equals('p'))
+                {
+                    markets[0].UpdateTicker();
+                    Currencies.PrintCurrencies();
+                }
                 else if (x.Equals('q'))
                 {
                     System.Environment.Exit(1);
@@ -65,14 +71,14 @@ namespace CryptoTrader
 			//Console.Write ("Current bitcoin ticker is:");
             Console.WriteLine("Creating markets...");
 			if (markets.Count < 1) { CreateMarket (); }
-			Console.WriteLine (markets[0].exchangeName + " market has been created.");
-            Console.WriteLine(markets[0].exchangeName + ": Updating ticker...");
-            markets[0].UpdateTicker();
-            Console.WriteLine(markets[0].exchangeName + ": Ticker updated");
-            Console.WriteLine();
+			Console.WriteLine (markets[0].exchangeName + " market has been created.");            
+            markets[0].UpdateTicker();            
+            Console.WriteLine();            
 			Console.WriteLine ("There are currently {0} Bitcoins in existence", markets[0].GetTotalBTC ());
 			Console.WriteLine ("\nIf the formatting is messed up, try fullscreening the console");
-			Console.WriteLine ("To see stats press 's' or press 'q' to quit");			
+			Console.WriteLine ("'s': to see stats.");
+            Console.WriteLine ("'p': to update ticker and print currency data.");
+            Console.WriteLine ("'q': to quit.");
 		}
 	}
 }

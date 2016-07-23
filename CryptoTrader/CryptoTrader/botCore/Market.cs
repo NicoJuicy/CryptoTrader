@@ -31,6 +31,7 @@ namespace CryptoTrader
          */
 		public void UpdateTicker ()
 		{
+            Console.WriteLine(exchangeName + ": Updating ticker...");
 			string tickerURL = "https://blockchain.info/ticker";
 	        string tickerData = MakeAPIRequest(tickerURL);
             tickerData = tickerData.Replace("{", "");
@@ -39,20 +40,33 @@ namespace CryptoTrader
             tickerData = tickerData.Replace("\"", "");
             // Regex to split string lines in an array
 	        string[] tickerDataLines = Regex.Split(tickerData, "\r\n|\r|\n");
-            Console.WriteLine( Currencies.GBP.ToString());
 	        // Iterates over all the lines with useful data
 	        for (int i = 2; i <= 22; i++)
-	        {
+	        {                
 	            // Parse important infomation out
-	            Console.WriteLine(tickerDataLines[i]);
-	        }
-	        /*
-	            * Once we get data from JSON string we can put the data into the respective fields for each currency.
-	            */
+                string type = tickerDataLines[i].Substring(0, 3);     // Gets first 3 chars which will be the type.                
+                tickerDataLines[i] = tickerDataLines[i].Substring(4); // Removes data we don't need anymore
+                string[] data = tickerDataLines[i].Split(',');
+                double ftm = Convert.ToDouble(data[0].Replace("15m:", ""));
+                double last = Convert.ToDouble(data[1].Replace("last:", ""));
+                double buy = Convert.ToDouble(data[2].Replace("buy:", ""));
+                double sell = Convert.ToDouble(data[3].Replace("sell:", ""));
+		        string symbol = data[4].Replace("symbol:", "");                             
 
-				// Kept serialization stuff incase we want use it still
-	            //JavaScriptSerializer data = new JavaScriptSerializer ();
-	            //data.Deserialize<string> (tickerData); // ?? no idea what im doing here ??
+                // Putting data into the correct Currency object
+                foreach (Currency c in Currencies.list)
+                {
+                    if (c.Type == type)
+                    {
+                        c.FifteenM = ftm;
+                        c.Last = last;
+                        c.Buy = buy;
+                        c.Sell = sell;
+                    }
+                }
+                // Console.WriteLine(String.Format("type: {0}, 15m: {1}, last: {2}, buy: {3}, sell: {4}, symbol: {5}", type, ftm, last, buy, sell, symbol));                 
+	        }
+	    Console.WriteLine(exchangeName + ": Ticker updated.");
 	}
 
 		public string GetStats ()

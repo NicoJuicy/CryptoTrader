@@ -81,7 +81,7 @@ namespace CryptoTrader
             set { _symbol = value; }
         }
 
-        public string ToString()
+        public override string ToString()
         {
             string s = String.Format("\"{0}\" : {{\"15m:\" {1}, \"last\" : {2}, \"buy\" : {3}, \"sell\" : {4}, \"symbol\" : \"{5}\"}}", _type, _15m, _last, _buy, _sell, _symbol);
             return s;
