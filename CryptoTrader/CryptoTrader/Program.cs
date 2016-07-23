@@ -7,7 +7,6 @@
         - That stores data in some easier to use format (XML or json?)
     Method to use historical data that can be used to train a neural network
 
-
 	Bitcoin API: https://blockchain.info/api
 */
 

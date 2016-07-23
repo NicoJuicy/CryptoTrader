@@ -8,6 +8,7 @@ namespace CryptoTrader
 		static int totalTraders = 0;
 		int traderId;
 		double cash;
+		List<string> wallets; 
 		List<Trade> openTrades;
 		List<Trade> pastTrades;
 
@@ -57,9 +58,11 @@ namespace CryptoTrader
 					trade.LimitOrderSell (price, qty);
 					break;
 				default:
-					Console.WriteLine ("Invalid trade type, Purchase failed");
+					Console.WriteLine ("Invalid trade type, Sale failed");
 					break;
 			}
+			pastTrades.Add (trade);
+			openTrades.Remove (trade);
 		}
 
 		public void CloseAllTrades () 

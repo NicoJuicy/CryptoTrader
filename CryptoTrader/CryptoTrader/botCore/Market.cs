@@ -51,6 +51,7 @@ namespace CryptoTrader
 			stats = stats.Replace (",", ",\n");
 			stats = stats.Replace ("{", "{\n");
 			stats = stats.Replace ("}", "\n}");
+			stats = stats.Replace (":", " : ");
 			return stats;
 		}
 
