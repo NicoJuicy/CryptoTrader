@@ -1,0 +1,10 @@
+*.suo
+CryptoTrader/CryptoTrader/bin/Debug/CryptoTrader.exe
+CryptoTrader/CryptoTrader/bin/Debug/CryptoTrader.vshost.exe
+*.manifest
+CryptoTrader/CryptoTrader/bin/Debug/Newtonsoft.Json.xml
+*.txt
+CryptoTrader/CryptoTrader/obj/x86/Debug/CryptoTrader.csprojResolveAssemblyReference.cache
+*.pdb
+CryptoTrader/CryptoTrader/obj/x86/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+CryptoTrader/CryptoTrader/obj/x86/Debug/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs

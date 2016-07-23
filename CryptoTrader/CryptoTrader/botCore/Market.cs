@@ -4,6 +4,7 @@
 		e.g. Long, short, market order, stop loss etc
 */
 
+using CryptoTrader.botCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -20,9 +21,6 @@ namespace CryptoTrader
 		public double currentPrice { get; set; }
 		MarketData data;
 
-		public enum Currencies { BTC, GBP };
-		public enum Exchanges { BLOCKCHAIN };
-
 		public Market (string name)
 		{
 			this.exchangeName = name;			
@@ -35,10 +33,13 @@ namespace CryptoTrader
 		{
 			string tickerURL = "https://blockchain.info/ticker";
 	        string tickerData = MakeAPIRequest(tickerURL);
-
-            //tickerData = tickerData.Remove('{');
-	        // Regex to split string into lines
-	        var tickerDataLines = Regex.Split(tickerData, "\r\n|\r|\n");
+            tickerData = tickerData.Replace("{", "");
+            tickerData = tickerData.Replace("}", "");
+            tickerData = tickerData.Replace(" ", "");
+            tickerData = tickerData.Replace("\"", "");
+            // Regex to split string lines in an array
+	        string[] tickerDataLines = Regex.Split(tickerData, "\r\n|\r|\n");
+            Console.WriteLine( Currencies.GBP.ToString());
 	        // Iterates over all the lines with useful data
 	        for (int i = 2; i <= 22; i++)
 	        {

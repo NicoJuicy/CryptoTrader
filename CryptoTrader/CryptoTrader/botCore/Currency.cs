@@ -19,7 +19,12 @@ namespace CryptoTrader
 		public Currency (string type, string symbol)
 		{
             this._type = type;
+            this._15m = -1;
+            this._last = -1;
+            this._buy = -1;
+            this._sell = -1;
             this._symbol = symbol;
+            
 		}
 
         /// <summary>
@@ -74,6 +79,12 @@ namespace CryptoTrader
         {
             get { return _symbol; }
             set { _symbol = value; }
+        }
+
+        public string ToString()
+        {
+            string s = String.Format("\"{0}\" : {{\"15m:\" {1}, \"last\" : {2}, \"buy\" : {3}, \"sell\" : {4}, \"symbol\" : \"{5}\"}}", _type, _15m, _last, _buy, _sell, _symbol);
+            return s;
         }
 
 	}
