@@ -33,16 +33,18 @@ namespace CryptoTrader
 			switch (tradeType) {
 			case "market":
 				trade.MarketOrderBuy (price, qty);
+                pastTrades.Add (trade);
+			    openTrades.Remove (trade);
 				return trade.tradeId;
 			case "limit":
 				trade.LimitOrderBuy (price, qty);
+                pastTrades.Add (trade);
+			    openTrades.Remove (trade);
 				return trade.tradeId;
 			default:
 				Console.WriteLine ("Invalid trade type, Purchase failed");
 				return -1;
-			}
-			pastTrades.Add (trade);
-			openTrades.Remove (trade);
+			}			
 		}
 
 		public void Sell (double price, double qty, string tradeType) 

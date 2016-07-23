@@ -44,10 +44,15 @@ namespace CryptoTrader
 			Console.Title = "Crypto Trader v0.1";
 			Console.WriteLine ("CryptoTrader v0.1");
 			Console.WriteLine ("Lets trade some bitcoins!\n");
-			Console.Write ("Current bitcoin ticker is:");
+			//Console.Write ("Current bitcoin ticker is:");
+            Console.WriteLine("Creating markets...");
 			if (markets.Count < 1) { CreateMarket (); }
-			Console.WriteLine (markets[0].UpdateTicker ("GBP", markets[0].exchangeName));
-			Console.WriteLine ("And there are currently {0} Bitcoins in existence", markets[0].GetTotalBTC ());
+			Console.WriteLine (markets[0].exchangeName + " market has been created.");
+            Console.WriteLine(markets[0].exchangeName + ": Updating ticker...");
+            markets[0].UpdateTicker();
+            Console.WriteLine(markets[0].exchangeName + ": Ticker updated");
+            Console.WriteLine();
+			Console.WriteLine ("There are currently {0} Bitcoins in existence", markets[0].GetTotalBTC ());
 			Console.WriteLine ("\nIf the formatting is messed up, try fullscreening the console");
 			Console.WriteLine ("To see stats press 's' or press 'q' to quit");
 			char x = (char)Console.Read ();

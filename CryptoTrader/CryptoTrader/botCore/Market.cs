@@ -4,7 +4,6 @@
 		e.g. Long, short, market order, stop loss etc
 */
 
-using CryptoTrader.botCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -26,9 +25,7 @@ namespace CryptoTrader
 
 		public Market (string name)
 		{
-			this.exchangeName = name;
-			// Ticker should be updated regularly to keep data up to date.
-			UpdateTicker();
+			this.exchangeName = name;			
 		}
 
         /*
@@ -36,34 +33,26 @@ namespace CryptoTrader
          */
 		public void UpdateTicker ()
 		{
-			if (exchange == exchangeName) {
-	            string tickerURL = "https://blockchain.info/ticker";
-	            string tickerData = MakeAPIRequest(tickerURL);
+			string tickerURL = "https://blockchain.info/ticker";
+	        string tickerData = MakeAPIRequest(tickerURL);
 
-	            string debug = tickerData.Split('\n')[2]; //splitting string into lines
-	            // Console.WriteLine(debug);
-	            // Regex to split string into lines
-	            var tickerDataLines = Regex.Split(tickerData, "\r\n|\r|\n");
-	            // Iterates over all the lines with useful data
-	            for (int i = 2; i <= 22; i++)
-	            {
-	                // Parse important infomation out
-	                Console.WriteLine(tickerDataLines[i]);
-	            }
-	            /*
-	             * Once we get data from JSON string we can put the data into the respective fields for each currency.
-	             */
-
-				 // Kept serialization stuff incase we want use it still
-	             //JavaScriptSerializer data = new JavaScriptSerializer ();
-	             //data.Deserialize<string> (tickerData); // ?? no idea what im doing here ??
+            //tickerData = tickerData.Remove('{');
+	        // Regex to split string into lines
+	        var tickerDataLines = Regex.Split(tickerData, "\r\n|\r|\n");
+	        // Iterates over all the lines with useful data
+	        for (int i = 2; i <= 22; i++)
+	        {
+	            // Parse important infomation out
+	            Console.WriteLine(tickerDataLines[i]);
 	        }
-			else {
-				return "error: Unknown exchange";
-			}
+	        /*
+	            * Once we get data from JSON string we can put the data into the respective fields for each currency.
+	            */
 
-
-		}
+				// Kept serialization stuff incase we want use it still
+	            //JavaScriptSerializer data = new JavaScriptSerializer ();
+	            //data.Deserialize<string> (tickerData); // ?? no idea what im doing here ??
+	}
 
 		public string GetStats ()
 		{
